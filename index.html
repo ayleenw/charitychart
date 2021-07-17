@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spendenstand</title>
+    <style>
+      #canvas01 {
+        background-color: #fff;
+      }
+      h1 {
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+          'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        color: brown;
+        padding-left: 2.5em;
+      }
+
+      #dataentry {
+        padding-left: 5em;
+        padding-top: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="dataentry">
+      <input id="moneyInput" type="text" value="" />
+      <input id="saveBtn" type="button" value="Speichern" />
+    </div>
+    <h1>Aktueller Spendenstand</h1>
+    <div>
+      <canvas id="canvas" width="500" height="500">No Canvas available</canvas>
+    </div>
+
+    <pre>
+      <script type="module" src="app.js"></script>
+    </pre>
+  </body>
+</html>
