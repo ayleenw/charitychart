@@ -2,15 +2,14 @@ import { getCanvas } from './canvas_lib.js';
 
 function Init() {
   let ctx = getCanvas('canvas');
+  let money = [];
   let barWidth = 80;
-  let barHeight = 0;
+  let barHeight = [];
   let maxHeight = ctx.canvas.height * 0.9;
   let maxValue = 500;
   const lineOuter = '#000';
   const lineInner = '#83aae5';
-  let money = [];
   let dataEntryVisible = false;
-  console.log(maxHeight);
 
   ctx.canvas.addEventListener(
     'dblclick',
@@ -31,8 +30,22 @@ function Init() {
 
   function saveDataPoint() {
     let actInput = document.getElementById('moneyInput').value;
-    barHeight = (parseInt(actInput, 10) / maxValue) * maxHeight;
-    money.push(barHeight);
+    money.push(actInput);
+
+    if (actInput >= maxValue) {
+      do {
+        maxValue += 100;
+      } while (actInput >= maxValue);
+
+      barHeight = [];
+      for (let i = 0; i < money.length; i++) {
+        let h = (money[i] / maxValue) * maxHeight;
+        barHeight.push(h);
+      }
+    } else {
+      let newHeight = (parseInt(actInput, 10) / maxValue) * maxHeight;
+      barHeight.push(newHeight);
+    }
   }
 
   function drawMeter() {
@@ -66,12 +79,12 @@ function Init() {
       ctx.stroke();
     }
     ctx.fillStyle = '#029534';
-    for (let i = 0; i <= money.length; i++) {
+    for (let i = 0; i <= barHeight.length; i++) {
       ctx.fillRect(
         100 * (i + 1),
-        ctx.canvas.height - money[i] - 50,
+        ctx.canvas.height - barHeight[i] - 50,
         barWidth,
-        money[i]
+        barHeight[i]
       );
     }
   }
