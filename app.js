@@ -8,7 +8,7 @@ function Init() {
   let maxValue = 500;
   const lineOuter = '#000';
   const lineInner = '#83aae5';
-  //   let money = [];
+  let money = [];
   let dataEntryVisible = false;
   console.log(maxHeight);
 
@@ -31,8 +31,8 @@ function Init() {
 
   function saveDataPoint() {
     let actInput = document.getElementById('moneyInput').value;
-    console.log(actInput);
     barHeight = (parseInt(actInput, 10) / maxValue) * maxHeight;
+    money.push(barHeight);
   }
 
   function drawMeter() {
@@ -66,7 +66,14 @@ function Init() {
       ctx.stroke();
     }
     ctx.fillStyle = '#029534';
-    ctx.fillRect(100, ctx.canvas.height - barHeight - 50, barWidth, barHeight);
+    for (let i = 0; i <= money.length; i++) {
+      ctx.fillRect(
+        100 * (i + 1),
+        ctx.canvas.height - money[i] - 50,
+        barWidth,
+        money[i]
+      );
+    }
   }
 
   function animate() {
