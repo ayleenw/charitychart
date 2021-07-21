@@ -3,7 +3,9 @@ import { getCanvas } from './canvas_lib.js';
 function Init() {
   let ctx = getCanvas('canvas');
   let money = [];
-  let barWidth = 80;
+  const barWidth = 100;
+  const barDistance = 50;
+  const bottomSpacing = 60;
   let barHeight = [];
   let maxHeight = ctx.canvas.height * 0.9;
   let maxValue = 500;
@@ -63,10 +65,14 @@ function Init() {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     ctx.font = '24px Arial';
 
+    // Print lines
     ctx.strokeStyle = lineOuter;
     ctx.beginPath();
-    ctx.moveTo(80, ctx.canvas.height - 50);
-    ctx.lineTo(ctx.canvas.width - 50, ctx.canvas.height - 50);
+    ctx.moveTo(80, ctx.canvas.height - bottomSpacing);
+    ctx.lineTo(
+      ctx.canvas.width - bottomSpacing,
+      ctx.canvas.height - bottomSpacing
+    );
     ctx.stroke();
 
     let lineDistance = maxHeight / 10;
@@ -82,20 +88,30 @@ function Init() {
       );
 
       ctx.beginPath();
-      ctx.moveTo(80, ctx.canvas.height - 50 - i * lineDistance);
+      ctx.moveTo(80, ctx.canvas.height - bottomSpacing - i * lineDistance);
       ctx.lineTo(
-        ctx.canvas.width - 50,
-        ctx.canvas.height - 50 - i * lineDistance
+        ctx.canvas.width - bottomSpacing,
+        ctx.canvas.height - bottomSpacing - i * lineDistance
       );
       ctx.stroke();
     }
+    // Print bars
     for (let i = 0; i < barHeight.length; i++) {
       ctx.fillStyle = '#000';
-      ctx.fillText(printDate, 120 * (i + 1), ctx.canvas.height - 20);
+      ctx.fillText(
+        printDate,
+        (barWidth + barDistance) * (i + 1),
+        ctx.canvas.height - 30
+      );
+      ctx.fillText(
+        printTime,
+        (barWidth + barDistance) * (i + 1),
+        ctx.canvas.height
+      );
       ctx.fillStyle = '#029534';
       ctx.fillRect(
-        120 * (i + 1),
-        ctx.canvas.height - barHeight[i] - 50,
+        (barWidth + barDistance) * (i + 1),
+        ctx.canvas.height - barHeight[i] - bottomSpacing,
         barWidth,
         barHeight[i]
       );
