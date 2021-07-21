@@ -7,6 +7,8 @@ function Init() {
   let barHeight = [];
   let maxHeight = ctx.canvas.height * 0.9;
   let maxValue = 500;
+  let printDate;
+  let printTime;
   const lineOuter = '#000';
   const lineInner = '#83aae5';
   let dataEntryVisible = false;
@@ -29,6 +31,15 @@ function Init() {
   else if (el.attachEvent) el.attachEvent('onclick', saveDataPoint);
 
   function saveDataPoint() {
+    const date = new Date();
+    let minutes = date.getMinutes();
+    if (minutes < 10) {
+      minutes = '0' + String(minutes);
+    }
+    printDate =
+      date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear();
+    printTime = date.getHours() + ':' + minutes + ' Uhr';
+
     let actInput = document.getElementById('moneyInput').value;
     money.push(actInput);
 
@@ -78,10 +89,12 @@ function Init() {
       );
       ctx.stroke();
     }
-    ctx.fillStyle = '#029534';
-    for (let i = 0; i <= barHeight.length; i++) {
+    for (let i = 0; i < barHeight.length; i++) {
+      ctx.fillStyle = '#000';
+      ctx.fillText(printDate, 120 * (i + 1), ctx.canvas.height - 20);
+      ctx.fillStyle = '#029534';
       ctx.fillRect(
-        100 * (i + 1),
+        120 * (i + 1),
         ctx.canvas.height - barHeight[i] - 50,
         barWidth,
         barHeight[i]
