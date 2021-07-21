@@ -7,10 +7,12 @@ function Init() {
   const barDistance = 50;
   const bottomSpacing = 60;
   let barHeight = [];
+  let dateStamp;
+  let timeStamp;
+  let printDate = [];
+  let printTime = [];
   let maxHeight = ctx.canvas.height * 0.9;
   let maxValue = 500;
-  let printDate;
-  let printTime;
   const lineOuter = '#000';
   const lineInner = '#83aae5';
   let dataEntryVisible = false;
@@ -38,9 +40,11 @@ function Init() {
     if (minutes < 10) {
       minutes = '0' + String(minutes);
     }
-    printDate =
+    dateStamp =
       date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear();
-    printTime = date.getHours() + ':' + minutes + ' Uhr';
+    printDate.push(dateStamp);
+    timeStamp = date.getHours() + ':' + minutes + ' Uhr';
+    printTime.push(timeStamp);
 
     let actInput = document.getElementById('moneyInput').value;
     money.push(actInput);
@@ -95,19 +99,20 @@ function Init() {
       );
       ctx.stroke();
     }
-    // Print bars
+    // Print date & time
     for (let i = 0; i < barHeight.length; i++) {
       ctx.fillStyle = '#000';
       ctx.fillText(
-        printDate,
+        printDate[i],
         (barWidth + barDistance) * (i + 1),
         ctx.canvas.height - 30
       );
       ctx.fillText(
-        printTime,
+        printTime[i],
         (barWidth + barDistance) * (i + 1),
         ctx.canvas.height
       );
+      // Print bars
       ctx.fillStyle = '#029534';
       ctx.fillRect(
         (barWidth + barDistance) * (i + 1),
