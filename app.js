@@ -69,16 +69,8 @@ function Init() {
     let actInput = document.getElementById('moneyInput').value;
     money.push(actInput);
 
-    if (actInput >= maxValue) {
-      do {
-        maxValue += 100;
-      } while (actInput >= maxValue);
-
-      barHeight = [];
-      for (let i = 0; i < money.length; i++) {
-        let h = (money[i] / maxValue) * maxHeight;
-        barHeight.push(h);
-      }
+    if (checkMaxValue(actInput)) {
+      recalcBars();
     } else {
       let newHeight = (parseInt(actInput, 10) / maxValue) * maxHeight;
       barHeight.push(newHeight);
@@ -88,12 +80,49 @@ function Init() {
     moneyField.value = '';
   }
 
+  function recalcBars() {
+    barHeight = [];
+    for (let i = 0; i < money.length; i++) {
+      let h = (money[i] / maxValue) * maxHeight;
+      barHeight.push(h);
+    }
+  }
+
   function deleteDataPoint() {
     if (money.length > 0) {
       money.length = money.length - 1;
       barHeight.length = barHeight.length - 1;
       printDate.length = printDate.length - 1;
       printTime.length = printTime.length - 1;
+    }
+    let max = getMaxValue();
+    if (checkMaxValue(max)) recalcBars();
+  }
+
+  function getMaxValue() {
+    let max = 0;
+    if (money.length > 0) {
+      max = money[0];
+      for (let i = 1; i < money.length; i++) {
+        if (money[i] > max) max = money[i];
+      }
+    }
+    return max;
+  }
+
+  function checkMaxValue(newValue) {
+    if (newValue >= maxValue) {
+      do {
+        maxValue += 100;
+      } while (newValue >= maxValue);
+      return true;
+    } else if (maxValue - newValue > 100) {
+      do {
+        maxValue -= 100;
+      } while (maxValue - newValue > 100);
+      return true;
+    } else {
+      return false;
     }
   }
 
