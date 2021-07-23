@@ -6,6 +6,9 @@ function Init() {
   const barWidth = 100;
   const barDistance = 50;
   const bottomSpacing = 60;
+  const dateField = document.getElementById('dateInput');
+  const timeField = document.getElementById('timeInput');
+  const moneyField = document.getElementById('moneyInput');
   let barHeight = [];
   let dateStamp;
   let timeStamp;
@@ -42,15 +45,25 @@ function Init() {
     btnDelete.attachEvent('onclick', deleteDataPoint);
 
   function saveDataPoint() {
+    dateStamp = document.getElementById('dateInput').value;
+    timeStamp = document.getElementById('timeInput').value;
+
     const date = new Date();
     let minutes = date.getMinutes();
     if (minutes < 10) {
       minutes = '0' + String(minutes);
     }
-    dateStamp =
-      date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear();
+    if (dateStamp == '') {
+      dateStamp =
+        date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear();
+    }
     printDate.push(dateStamp);
-    timeStamp = date.getHours() + ':' + minutes + ' Uhr';
+
+    if (timeStamp == '') {
+      timeStamp = date.getHours() + ':' + minutes + ' Uhr';
+    } else {
+      timeStamp = timeStamp + ' Uhr';
+    }
     printTime.push(timeStamp);
 
     let actInput = document.getElementById('moneyInput').value;
@@ -70,6 +83,9 @@ function Init() {
       let newHeight = (parseInt(actInput, 10) / maxValue) * maxHeight;
       barHeight.push(newHeight);
     }
+    dateField.value = '';
+    timeField.value = '';
+    moneyField.value = '';
   }
 
   function deleteDataPoint() {

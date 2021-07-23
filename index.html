@@ -24,10 +24,21 @@
   </head>
   <body>
     <div id="dataentry">
+      <label>Datum (Format: dd.mm.jjjj): </label>
+      <input id="dateInput" type="text" value="" />
+      <label>Zeit (Format: hh:mm): </label>
+      <input id="timeInput" type="text" value="" />
+      <label>Geldbetrag: </label>
       <input id="moneyInput" type="text" value="" />
       <input id="saveBtn" type="button" value="Speichern" />
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <br />
+      <label
+        >--- Datum und Zeit freilassen für aktuellen Zeitstempel ---
+      </label>
       <input id="delBtn" type="button" value="Letzten Eintrag löschen" />
+      <label
+        >--- Doppelklicken ins Diagramm um diese Eingabemaske auszublenden ---
+      </label>
     </div>
     <h1>Aktueller Spendenstand</h1>
     <div>
