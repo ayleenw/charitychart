@@ -30,9 +30,16 @@ function Init() {
     false
   );
 
-  let el = document.getElementById('saveBtn');
-  if (el.addEventListener) el.addEventListener('click', saveDataPoint, false);
-  else if (el.attachEvent) el.attachEvent('onclick', saveDataPoint);
+  let btnSave = document.getElementById('saveBtn');
+  if (btnSave.addEventListener)
+    btnSave.addEventListener('click', saveDataPoint, false);
+  else if (btnSave.attachEvent) btnSave.attachEvent('onclick', saveDataPoint);
+
+  let btnDelete = document.getElementById('delBtn');
+  if (btnDelete.addEventListener)
+    btnDelete.addEventListener('click', deleteDataPoint, false);
+  else if (btnDelete.attachEvent)
+    btnDelete.attachEvent('onclick', deleteDataPoint);
 
   function saveDataPoint() {
     const date = new Date();
@@ -62,6 +69,15 @@ function Init() {
     } else {
       let newHeight = (parseInt(actInput, 10) / maxValue) * maxHeight;
       barHeight.push(newHeight);
+    }
+  }
+
+  function deleteDataPoint() {
+    if (money.length > 0) {
+      money.length = money.length - 1;
+      barHeight.length = barHeight.length - 1;
+      printDate.length = printDate.length - 1;
+      printTime.length = printTime.length - 1;
     }
   }
 
