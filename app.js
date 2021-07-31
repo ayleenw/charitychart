@@ -27,14 +27,18 @@ function Init() {
   const dateField = document.getElementById('dateInput');
   const timeField = document.getElementById('timeInput');
   const moneyField = document.getElementById('moneyInput');
+
   let dateStamp;
   let timeStamp;
   let maxHeight = ctx.canvas.height * 0.9;
   let maxValue = 500;
   const initialMax = maxValue;
+  let dataEntryVisible = false;
+
   const lineOuter = '#000';
   const lineInner = '#83aae5';
-  let dataEntryVisible = false;
+  const myGreen = '#70AF78';
+  const myBlue = '#2E00FF';
 
   ctx.canvas.addEventListener(
     'dblclick',
@@ -167,7 +171,7 @@ function Init() {
 
     let lineDistance = maxHeight / 10;
     let valueDistance = maxValue / 10;
-    ctx.fillStyle = '#000';
+    ctx.fillStyle = myBlue;
     ctx.strokeStyle = lineInner;
 
     for (let i = 1; i <= 10; i++) {
@@ -187,7 +191,7 @@ function Init() {
     }
     // Print date & time
     for (let i = 0; i < barHeight.length; i++) {
-      ctx.fillStyle = '#000';
+      ctx.fillStyle = myBlue;
       ctx.fillText(
         printDate[i],
         (barWidth + barDistance) * (i + 1),
@@ -199,7 +203,7 @@ function Init() {
         ctx.canvas.height
       );
       // Print bars
-      ctx.fillStyle = '#029534';
+      ctx.fillStyle = myGreen;
       ctx.fillRect(
         (barWidth + barDistance) * (i + 1),
         ctx.canvas.height - barHeight[i] - bottomSpacing,
