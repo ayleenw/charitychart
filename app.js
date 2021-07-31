@@ -7,19 +7,23 @@ function Init() {
   let lsBars = localStorage.getItem('barHeight');
   let lsDate = localStorage.getItem('printDate');
   let lsTime = localStorage.getItem('printTime');
-  console.log(lsMoney);
-  console.log(lsBars);
-  console.log(lsDate);
-  console.log(lsTime);
 
   let money = [];
-  money = JSON.parse(lsMoney);
+  if (lsMoney) {
+    money = JSON.parse(lsMoney);
+  }
   let barHeight = [];
-  barHeight = JSON.parse(lsBars);
+  if (lsBars) {
+    barHeight = JSON.parse(lsBars);
+  }
   let printDate = [];
-  printDate = JSON.parse(lsDate);
+  if (lsDate) {
+    printDate = JSON.parse(lsDate);
+  }
   let printTime = [];
-  printTime = JSON.parse(lsTime);
+  if (lsTime) {
+    printTime = JSON.parse(lsTime);
+  }
 
   const barWidth = 100;
   const barDistance = 50;
@@ -189,27 +193,29 @@ function Init() {
       );
       ctx.stroke();
     }
-    // Print date & time
-    for (let i = 0; i < barHeight.length; i++) {
-      ctx.fillStyle = myBlue;
-      ctx.fillText(
-        printDate[i],
-        (barWidth + barDistance) * (i + 1),
-        ctx.canvas.height - 30
-      );
-      ctx.fillText(
-        printTime[i],
-        (barWidth + barDistance) * (i + 1),
-        ctx.canvas.height
-      );
-      // Print bars
-      ctx.fillStyle = myGreen;
-      ctx.fillRect(
-        (barWidth + barDistance) * (i + 1),
-        ctx.canvas.height - barHeight[i] - bottomSpacing,
-        barWidth,
-        barHeight[i]
-      );
+    if (money) {
+      // Print date & time
+      for (let i = 0; i < barHeight.length; i++) {
+        ctx.fillStyle = myBlue;
+        ctx.fillText(
+          printDate[i],
+          (barWidth + barDistance) * (i + 1),
+          ctx.canvas.height - 30
+        );
+        ctx.fillText(
+          printTime[i],
+          (barWidth + barDistance) * (i + 1),
+          ctx.canvas.height
+        );
+        // Print bars
+        ctx.fillStyle = myGreen;
+        ctx.fillRect(
+          (barWidth + barDistance) * (i + 1),
+          ctx.canvas.height - barHeight[i] - bottomSpacing,
+          barWidth,
+          barHeight[i]
+        );
+      }
     }
   }
 
