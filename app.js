@@ -16,6 +16,7 @@ function Init() {
   let printTime = [];
   let maxHeight = ctx.canvas.height * 0.9;
   let maxValue = 500;
+  const initialMax = maxValue;
   const lineOuter = '#000';
   const lineInner = '#83aae5';
   let dataEntryVisible = false;
@@ -116,10 +117,10 @@ function Init() {
         maxValue += 100;
       } while (newValue >= maxValue);
       return true;
-    } else if (maxValue - newValue > 100) {
+    } else if (maxValue - newValue > 100 && maxValue > initialMax) {
       do {
         maxValue -= 100;
-      } while (maxValue - newValue > 100);
+      } while (maxValue - newValue > 100 && maxValue > initialMax);
       return true;
     } else {
       return false;
