@@ -2,18 +2,33 @@ import { getCanvas } from './canvas_lib.js';
 
 function Init() {
   let ctx = getCanvas('canvas');
+
+  let lsMoney = localStorage.getItem('money');
+  let lsBars = localStorage.getItem('barHeight');
+  let lsDate = localStorage.getItem('printDate');
+  let lsTime = localStorage.getItem('printTime');
+  console.log(lsMoney);
+  console.log(lsBars);
+  console.log(lsDate);
+  console.log(lsTime);
+
   let money = [];
+  money = JSON.parse(lsMoney);
+  let barHeight = [];
+  barHeight = JSON.parse(lsBars);
+  let printDate = [];
+  printDate = JSON.parse(lsDate);
+  let printTime = [];
+  printTime = JSON.parse(lsTime);
+
   const barWidth = 100;
   const barDistance = 50;
   const bottomSpacing = 60;
   const dateField = document.getElementById('dateInput');
   const timeField = document.getElementById('timeInput');
   const moneyField = document.getElementById('moneyInput');
-  let barHeight = [];
   let dateStamp;
   let timeStamp;
-  let printDate = [];
-  let printTime = [];
   let maxHeight = ctx.canvas.height * 0.9;
   let maxValue = 500;
   const initialMax = maxValue;
@@ -79,6 +94,7 @@ function Init() {
     dateField.value = '';
     timeField.value = '';
     moneyField.value = '';
+    saveToLocalStorage();
   }
 
   function recalcBars() {
@@ -98,6 +114,7 @@ function Init() {
     }
     let max = getMaxValue();
     if (checkMaxValue(max)) recalcBars();
+    saveToLocalStorage();
   }
 
   function getMaxValue() {
@@ -125,6 +142,13 @@ function Init() {
     } else {
       return false;
     }
+  }
+
+  function saveToLocalStorage() {
+    localStorage.setItem('money', JSON.stringify(money));
+    localStorage.setItem('barHeight', JSON.stringify(barHeight));
+    localStorage.setItem('printDate', JSON.stringify(printDate));
+    localStorage.setItem('printTime', JSON.stringify(printTime));
   }
 
   function drawMeter() {
