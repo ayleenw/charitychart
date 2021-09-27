@@ -2,7 +2,7 @@ export function getCanvas(id) {
   let canvas = document.getElementById(id);
   let context = canvas.getContext('2d');
   context.canvas.width = window.innerWidth;
-  context.canvas.height = window.innerHeight * 0.8;
+  context.canvas.height = window.innerHeight * 0.9;
   return context;
 }
 

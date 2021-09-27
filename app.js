@@ -27,7 +27,7 @@ function Init() {
 
   const barWidth = 100;
   const barDistance = 50;
-  const bottomSpacing = 60;
+  const bottomSpacing = 90;
   const dateField = document.getElementById('dateInput');
   const timeField = document.getElementById('timeInput');
   const moneyField = document.getElementById('moneyInput');
@@ -200,12 +200,12 @@ function Init() {
         ctx.fillText(
           printDate[i],
           (barWidth + barDistance) * (i + 1),
-          ctx.canvas.height - 30
+          ctx.canvas.height - 60
         );
         ctx.fillText(
           printTime[i],
           (barWidth + barDistance) * (i + 1),
-          ctx.canvas.height
+          ctx.canvas.height - 30
         );
         // Print bars
         ctx.fillStyle = myGreen;
